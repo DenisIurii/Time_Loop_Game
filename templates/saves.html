@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Сохранения</h2>
+{% for s in saves %}<div>{{ s['id'] }} - {{ s['name'] }} - {{ s['scene_id'] }} - {{ s['created_at'] }}</div>{% endfor %}
+{% endblock %}

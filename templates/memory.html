@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Архив</h2>
+{% for f in fragments %}<div>{{ f['key'] }} - {{ f['text'] }} - {{ f['found_at'] }}</div>{% endfor %}
+{% endblock %}
