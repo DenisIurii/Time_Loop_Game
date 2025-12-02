@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect, url_for, request, session, g
 import sqlite3, os, json, datetime, random
 from story import story, SECRET_ADMIN_KEY, ENDINGS_LIST
 
-db_initialized = False
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "change_me")
 
@@ -16,15 +15,27 @@ def get_db():
         db.row_factory = sqlite3.Row
     return db
 
-# ...existing code...
-# Удалена функция setup, использовавшая @app.before_first_request
-# ...existing code...
-#@app.before_request
-#def ensure_db_initialized():
-#    global db_initialized
-#    if not db_initialized:
-#        init_db()
-# ...existing code...
+ef init_db():
+    db = get_db()
+    db.execute("""CREATE TABLE IF NOT EXISTS saves (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        scene_id TEXT NOT NULL,
+        data TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )""")
+
+    db.execute("""CREATE TABLE IF NOT EXISTS fragments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key TEXT,
+        text,
+        found_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )""")
+
+    db.commit()
+
+with app.app_context():
+    init_db()
 
 @app.route('/')
 def index():
