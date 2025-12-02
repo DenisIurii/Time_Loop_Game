@@ -18,12 +18,12 @@ def get_db():
 # ...existing code...
 # Удалена функция setup, использовавшая @app.before_first_request
 # ...existing code...
-@app.before_request
-def ensure_db_initialized():
-    global db_initialized
-    if not db_initialized:
-        init_db()
-        db_initialized = True
+#@app.before_request
+#def ensure_db_initialized():
+#    global db_initialized
+#    if not db_initialized:
+#        init_db()
+#        db_initialized = True
 # ...existing code...
 
 @app.route('/')
@@ -75,3 +75,4 @@ def memory():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
