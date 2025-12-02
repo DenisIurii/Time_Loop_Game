@@ -23,7 +23,7 @@ def get_db():
 #    global db_initialized
 #    if not db_initialized:
 #        init_db()
-#        db_initialized = True
+        db_initialized = False
 # ...existing code...
 
 @app.route('/')
