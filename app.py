@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, session, g
 import sqlite3, os, json, datetime, random
 from story import story, SECRET_ADMIN_KEY, ENDINGS_LIST
 
+db_initialized = False
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "change_me")
 
@@ -23,7 +24,6 @@ def get_db():
 #    global db_initialized
 #    if not db_initialized:
 #        init_db()
-        db_initialized = False
 # ...existing code...
 
 @app.route('/')
